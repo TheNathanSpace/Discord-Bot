@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 from module_dnd import ListenerDnD
-from module_help import Help
+from module_help import Help, description
 from module_misc import ListenerMisc
 from module_reaction_images import ReactionImages
 from module_vote_to_kick import Kick
