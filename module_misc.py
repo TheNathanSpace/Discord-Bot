@@ -36,3 +36,12 @@ class ListenerMisc(commands.Cog):
         await ctx.send("!clear")
         await ctx.send("!play https://www.youtube.com/playlist?list=PLgzlUkIE7GetXYU0e3GiVISdaJPa_fWlH")
         await ctx.send("!shuffle")
+
+    @commands.command(aliases = [])
+    async def techno(self, ctx):
+        """TECHNO UNION TECHNO UNION"""
+        trigger = ctx.message
+        await trigger.delete()
+        await ctx.send("!clear")
+        await ctx.send("!play https://www.youtube.com/playlist?list=PLgzlUkIE7GetEvgEWRDaUDGbH0u_0IA7i")
+        await ctx.send("!shuffle")
