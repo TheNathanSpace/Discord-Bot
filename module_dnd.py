@@ -58,18 +58,18 @@ class ListenerDnD(commands.Cog):
             if "Hail Dirko" in message.content:
                 await channel.send("Hail Dirko")
 
-            found = re.findall("(\d+\.?\d*) *(\((V|v)\)|V|v){1}", message.content)
+            found_vb = re.findall("(\d+\.?\d*) *(\((V|v)\)|V|v){1}", message.content)
 
-            for full_match in found:
+            for full_match in found_vb:
                 amount = full_match[0]
 
                 amount = float(amount)
                 gold = amount * 5 / 4
                 await channel.send(f"{str(amount)}(V) = " + str("{:,}".format(round(gold, 3))) + "gp")
 
-            found = re.findall("(\d+\.?\d*) *(gp){1}", message.content)
+            found_gp = re.findall("(\d+\.?\d*) *(gp){1}", message.content)
 
-            for full_match in found:
+            for full_match in found_gp:
                 amount = full_match[0]
 
                 amount = float(amount)
