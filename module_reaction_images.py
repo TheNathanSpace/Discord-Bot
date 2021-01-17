@@ -68,5 +68,9 @@ class ReactionImages(commands.Cog, name = "Reaction Images"):
         """Don't be stupid, be a **smarty!**"""
         trigger = ctx.message
         await trigger.delete()
-        myfile = discord.File("/home/nathan/Reaction-Image/THAT%27S%20OUR%20HITLER%20small.gif", filename = "image.gif")
-        await ctx.send(file = myfile)
+        try:
+            myfile = discord.File("/home/nathan/Reaction-Image/THAT%27S%20OUR%20HITLER%20small.gif", filename = "image.gif")
+            await ctx.send(file = myfile)
+        except FileNotFoundError:
+            myfile = discord.File("THAT'S OUR HITLER small.gif", filename = "image.gif")
+            await ctx.send(file = myfile)

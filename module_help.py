@@ -5,7 +5,7 @@ description_reaction = {"!cringe": "\"The goose,  Mr. Holmes!  The goose,  sir!\
                         "!madness": "It's just... good business.", "!hitler": "Don't be stupid, be a **smarty!**"}
 
 description_dnd = {"!travel": "`!travel` `<light years>` `<size class>` `<days>`", "!travel (fuel)": "`!travel` `<light years>` `<size class>` `<fuel>` `true`", "!prices": "Display prices of space gear",
-                   "!food": "`!food` `<number of people>` `<dL of food>`", "Currency Conversion": "Type the amount in chat, like `3000(V)` or `125gp`"}
+                   "!food": "`!food` `<number of people>` `<dL of food>`", "!survival": "`!survival` `<creature>`", "Currency Conversion": "Type the amount in chat, like `3000(V)` or `125gp`"}
 
 description_utility = {"!kick [user]": "Vote to kick?", "!server": "Get the current minigames server IP address", "!java": "lol"}
 

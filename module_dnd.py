@@ -1,4 +1,5 @@
 import math
+import random
 import re
 
 import discord
@@ -9,6 +10,7 @@ class ListenerDnD(commands.Cog):
     def __init__(self, bot, c):
         self.bot = bot
         self.c = c
+        self.glock = False
 
     @commands.command()
     async def prices(self, ctx):
@@ -23,6 +25,29 @@ class ListenerDnD(commands.Cog):
             embed.add_field(name = price, value = prices_list[price], inline = False)
 
         embed.set_author(name = "Prices", icon_url = "https://i0.kym-cdn.com/entries/icons/facebook/000/019/601/smilelaugh.jpg", url = "https://www.youtube.com/watch?v=90hIAXlBGzY")
+
+        await ctx.send(embed = embed)
+
+    @commands.command()
+    async def survival(self, ctx, name):
+        """"DnD prices"""
+        embed = discord.Embed(
+            colour = discord.Colour.dark_purple()
+        )
+
+        chance = random.randint(0, 100)
+
+        if name == "Connor": chance = 0.001
+
+        if name == "Rey": chance = 200
+
+        if self.glock:
+            chance = 0
+            self.glock = False
+
+        embed.add_field(name = "Chance of Survival", value = str(chance) + "%")
+
+        embed.set_author(name = "Calculations", icon_url = "https://i0.kym-cdn.com/entries/icons/facebook/000/019/601/smilelaugh.jpg", url = "https://www.youtube.com/watch?v=90hIAXlBGzY")
 
         await ctx.send(embed = embed)
 
@@ -57,6 +82,9 @@ class ListenerDnD(commands.Cog):
 
             if "Hail Dirko" in message.content:
                 await channel.send("Hail Dirko")
+
+            if "me after I buy a glock" in message.content:
+                self.glock = True
 
             found_vb = re.findall("(\d+\.?\d*) *(\((V|v)\)|V|v){1}", message.content)
 
