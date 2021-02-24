@@ -45,3 +45,19 @@ class ListenerMisc(commands.Cog):
         await ctx.send("!clear")
         await ctx.send("!play https://www.youtube.com/playlist?list=PLgzlUkIE7GetEvgEWRDaUDGbH0u_0IA7i")
         await ctx.send("!shuffle")
+
+    @commands.command(aliases = [])
+    async def impeach(self, ctx):
+        trigger = ctx.message
+        await trigger.delete()
+        await ctx.send("""IM IMPEACHING YOU, DONALD!:sob::wave:
+
+██]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] 10% complete…..
+
+████]]]]]]]]]]]]]]]]]]]]]]]]]]] 35% complete….
+
+███████]]]]]]]]]]]]]]]] 60% complete….
+
+███████████] 99% complete…..
+
+:no_entry_sign:ERROR!:no_entry_sign: :flag_ru:legitimate:flag_ru: presidents are irreplaceable :ballot_box: i could never delete you donald! :ballot_box: send this to ten other :briefcase:delegates:necktie: who give you :ballot_box_with_check:️votes:ballot_box_with_check:️ or never get jobs back from :flag_cn:china:flag_cn: again:x::x::construction_worker::factory::x::x: If you get 0 back: low-energy :no_entry_sign::no_entry_sign::turtle: 3 back: you’re bigly :top::frog: 5 back: you’re YUGE:tangerine::department_store::dollar: 10+ back: make america great again :star_and_crescent::taco::passport_control::no_entry::construction::statue_of_liberty::fireworks::flag_us:""")
