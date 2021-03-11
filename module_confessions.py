@@ -1,3 +1,4 @@
+import json
 import time
 from datetime import datetime
 from pathlib import Path
@@ -26,5 +27,19 @@ class ListenerConfession(commands.Cog):
             time_string = "[" + message_time.strftime("%b %d, %Y %H:%M:%S.%f") + "]"
             author_string = message.author.name
 
+            prefix = f"{time_string} {author_string}: "
+
+            attachment_list = message.attachments
+
+            attachment_url_list = []
+            for attachment in attachment_list:
+                attachment_url = attachment.url
+                attachment_url_list.append(attachment_url)
+
+            serialized_attachments = json.dumps(attachment_url_list)
+
+            empty_prefix = " " * len(prefix)
+
             with confessions_file.open("a") as f:
-                f.write(f"{time_string} {author_string}: {message.content}\n")
+                f.write(f"{prefix}{message.content}\n")
+                f.write(f"{empty_prefix}{serialized_attachments}\n")
