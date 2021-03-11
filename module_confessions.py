@@ -31,20 +31,20 @@ class ListenerConfession(commands.Cog):
             prefix = f"{time_string} {author_string}: "
             empty_prefix = " " * len(prefix)
 
-            embed_list = message.embeds
-            if len(embed_list) > 0:
-                embed_url_list = []
-                for embed in embed_list:
-
-                    if embed.image != discord.Embed.Empty:
-                        embed_url_list.append(embed.image.url)
-                    if embed.video != discord.Embed.Empty:
-                        print(type(embed.video))
-                        print(type(embed.video.url))
-                        embed_url_list.append(embed.video.url)
-
-                print(embed_url_list)
-                serialized_embeds = json.dumps(embed_url_list)
+            # embed_list = message.embeds
+            # if len(embed_list) > 0:
+            #     embed_url_list = []
+            #     for embed in embed_list:
+            #
+            #         if embed.image != discord.Embed.Empty:
+            #             embed_url_list.append(embed.image.url)
+            #         if embed.video != discord.Embed.Empty:
+            #             print(type(embed.video))
+            #             print(type(embed.video.url))
+            #             embed_url_list.append(embed.video.url)
+            #
+            #     print(embed_url_list)
+            #     serialized_embeds = json.dumps(embed_url_list)
 
             attachment_list = message.attachments
             if len(attachment_list) > 0:
@@ -60,8 +60,8 @@ class ListenerConfession(commands.Cog):
             with confessions_file.open("a") as f:
                 f.write(f"{prefix}{message.content}\n")
 
-                if len(embed_list) > 0:
-                    f.write(f"{empty_prefix}{serialized_embeds}\n")
+                # if len(embed_list) > 0:
+                #     f.write(f"{empty_prefix}{serialized_embeds}\n")
 
                 if len(attachment_list) > 0:
                     f.write(f"{empty_prefix}{serialized_attachments}\n")
