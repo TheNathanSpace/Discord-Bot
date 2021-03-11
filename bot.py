@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 
+from module_confessions import ListenerConfession
 from module_dnd import ListenerDnD
 from module_help import Help, description
 from module_misc import ListenerMisc
@@ -23,8 +24,9 @@ async def on_ready():
 
 bot.add_cog(Kick(bot))
 bot.add_cog(ReactionImages(bot))
-bot.add_cog(ListenerMisc(bot, client))
-bot.add_cog(ListenerDnD(bot, client))
+bot.add_cog(ListenerMisc(bot))
+bot.add_cog(ListenerDnD(bot))
 bot.add_cog(Help(bot))
+bot.add_cog(ListenerConfession(bot))
 
 bot.run(key)

@@ -7,9 +7,8 @@ from discord.ext import commands
 
 
 class ListenerDnD(commands.Cog):
-    def __init__(self, bot, c):
+    def __init__(self, bot):
         self.bot = bot
-        self.c = c
         self.glock = False
 
     @commands.command()

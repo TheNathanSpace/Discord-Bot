@@ -1,11 +1,9 @@
-import json
-from datetime import datetime
 from pathlib import Path
 
 from discord.ext import commands
 
 
-class ListenerConfessiosn(commands.Cog):
+class ListenerConfession(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -13,6 +11,9 @@ class ListenerConfessiosn(commands.Cog):
     async def on_message(self, message):
         if int(message.channel.id) == int(788839489216315433):
             confessions_file = Path("confessions.txt")
+
+            if not confessions_file.exists():
+                confessions_file.touch()
 
             time_string = "[" + message.created_at.strftime("%b %d, %Y %H:%M:%S.%f") + "]"
             author_string = message.author.name

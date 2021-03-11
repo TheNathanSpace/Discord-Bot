@@ -3,9 +3,8 @@ from requests import get
 
 
 class ListenerMisc(commands.Cog):
-    def __init__(self, bot, c):
+    def __init__(self, bot):
         self.bot = bot
-        self.c = c
 
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):  # 168223477105426432
