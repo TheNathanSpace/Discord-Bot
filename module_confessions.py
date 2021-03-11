@@ -3,6 +3,7 @@ import time
 from datetime import datetime
 from pathlib import Path
 
+from discord import Embed
 from discord.ext import commands
 
 
@@ -34,9 +35,9 @@ class ListenerConfession(commands.Cog):
             if len(embed_list) > 0:
                 embed_url_list = []
                 for embed in embed_list:
-                    if embed.image != embed.Empty:
+                    if embed.image != Embed.Empty:
                         embed_url_list.append(embed.image.url)
-                    if embed.video != embed.Empty:
+                    if embed.video != Embed.Empty:
                         embed_url_list.append(embed.video.url)
                 print(embed_url_list)
                 serialized_embeds = json.dumps(embed_url_list)
