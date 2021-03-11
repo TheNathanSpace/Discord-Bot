@@ -38,7 +38,7 @@ class ListenerConfession(commands.Cog):
                         embed_url_list.append(embed.image.url)
                     if embed.video != embed.Empty:
                         embed_url_list.append(embed.video.url)
-
+                print(embed_url_list)
                 serialized_embeds = json.dumps(embed_url_list)
 
             attachment_list = message.attachments
