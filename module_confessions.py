@@ -35,6 +35,7 @@ class ListenerConfession(commands.Cog):
                 embed_url_list = []
                 for embed in embed_list:
                     embed_url = embed.url
+                    print(embed_url)
                     embed_url_list.append(embed_url)
 
                 serialized_embeds = json.dumps(embed_url_list)
