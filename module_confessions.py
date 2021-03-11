@@ -28,18 +28,33 @@ class ListenerConfession(commands.Cog):
             author_string = message.author.name
 
             prefix = f"{time_string} {author_string}: "
+            empty_prefix = " " * len(prefix)
+
+            embed_list = message.embeds
+            if len(embed_list) > 0:
+                embed_url_list = []
+                for embed in embed_list:
+                    embed_url = embed.url
+                    embed_url_list.append(embed_url)
+
+                serialized_embeds = json.dumps(embed_url_list)
 
             attachment_list = message.attachments
+            if len(attachment_list) > 0:
+                attachment_url_list = []
+                for attachment in attachment_list:
+                    attachment_url = attachment.url
+                    attachment_url_list.append(attachment_url)
 
-            attachment_url_list = []
-            for attachment in attachment_list:
-                attachment_url = attachment.url
-                attachment_url_list.append(attachment_url)
+                serialized_attachments = json.dumps(attachment_url_list)
 
-            serialized_attachments = json.dumps(attachment_url_list)
-
-            empty_prefix = " " * len(prefix)
+                empty_prefix = " " * len(prefix)
 
             with confessions_file.open("a") as f:
                 f.write(f"{prefix}{message.content}\n")
-                f.write(f"{empty_prefix}{serialized_attachments}\n")
+
+                if len(embed_list) > 0:
+                    f.write(f"{empty_prefix}{serialized_embeds}\n")
+
+                if len(attachment_list) > 0:
+                    f.write(f"{empty_prefix}{serialized_attachments}\n")
