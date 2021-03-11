@@ -34,9 +34,10 @@ class ListenerConfession(commands.Cog):
             if len(embed_list) > 0:
                 embed_url_list = []
                 for embed in embed_list:
-                    embed_url = embed.url
-                    print(embed_url)
-                    embed_url_list.append(embed_url)
+                    if embed.image != embed.Empty:
+                        embed_url_list.append(embed.image.url)
+                    if embed.video != embed.Empty:
+                        embed_url_list.append(embed.video.url)
 
                 serialized_embeds = json.dumps(embed_url_list)
 
