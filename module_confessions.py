@@ -68,12 +68,15 @@ class ListenerConfession(commands.Cog):
 
             private_confessions_channel = self.bot.get_channel(819972744221163603)
 
-            content_to_send = " > " + message.content
+            if len(message.content) > 0:
+                content_to_send = " > " + message.content
+            else:
+                content_to_send = ""
 
             if len(attachment_list) > 0:
                 content_to_send = content_to_send + "\n" + serialized_attachments
 
-            content_to_send = f"{author_string}: \n" + content_to_send
+            content_to_send = f"**{author_string}:**" + content_to_send
 
             if len(message.embeds) > 0:
                 embed_to_send = message.embeds[0]
