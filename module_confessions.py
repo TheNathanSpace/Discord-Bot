@@ -76,7 +76,10 @@ class ListenerConfession(commands.Cog):
             if len(attachment_list) > 0:
                 content_to_send = content_to_send + "\n" + serialized_attachments
 
-            content_to_send = f"**{author_string}:**" + content_to_send
+            if len(message.content) > 0:
+                content_to_send = f"**{author_string}:**\n" + content_to_send
+            else:
+                content_to_send = f"**{author_string}:**" + content_to_send
 
             if len(message.embeds) > 0:
                 embed_to_send = message.embeds[0]
