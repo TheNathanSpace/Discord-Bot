@@ -65,3 +65,15 @@ class ListenerConfession(commands.Cog):
 
                 if len(attachment_list) > 0:
                     f.write(f"{empty_prefix}{serialized_attachments}\n")
+
+            private_confessions_channel = self.bot.get_channel(819972744221163603)
+
+            content_to_send = message.content
+            embed_to_send = message.embeds[0]
+
+            if len(attachment_list) > 0:
+                content_to_send = content_to_send + "\n" + serialized_attachments
+
+            content_to_send = f"{author_string}: \n" + content_to_send
+
+            await private_confessions_channel.send(content = content_to_send, embed = embed_to_send)
