@@ -85,7 +85,7 @@ class ListenerConfession(commands.Cog):
                 author_string = ""
 
             if len(message.content) > 0 and new_author:
-                content_to_send = f"{author_string}\n" + content_to_send
+                content_to_send = f"{author_string}" + content_to_send
             elif len(message.content) > 0 and not new_author:
                 content_to_send = content_to_send
             else:
