@@ -75,7 +75,10 @@ class ListenerConfession(commands.Cog):
                 content_to_send = ""
 
             if len(attachment_list) > 0:
-                content_to_send = content_to_send + "\n" + serialized_attachments
+                if len(message.content) > 0:
+                    content_to_send = content_to_send + "\n" + serialized_attachments
+                else:
+                    content_to_send = serialized_attachments
 
             new_author = False
             if self.latest_sender is None or self.latest_sender != message.author:
