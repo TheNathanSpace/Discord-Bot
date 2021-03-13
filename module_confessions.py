@@ -10,6 +10,7 @@ from discord.ext import commands
 class ListenerConfession(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.latest_sender = None
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -76,10 +77,21 @@ class ListenerConfession(commands.Cog):
             if len(attachment_list) > 0:
                 content_to_send = content_to_send + "\n" + serialized_attachments
 
-            if len(message.content) > 0:
-                content_to_send = f"**{author_string}:**\n" + content_to_send
+            new_author = False
+            if self.latest_sender is None or self.latest_sender != message.author:
+                author_string = f"**{author_string}:**\n"
+                new_author = True
             else:
-                content_to_send = f"**{author_string}:**" + content_to_send
+                author_string = ""
+
+            if len(message.content) > 0 and new_author:
+                content_to_send = f"{author_string}\n" + content_to_send
+            elif len(message.content) > 0 and not new_author:
+                content_to_send = content_to_send
+            else:
+                content_to_send = author_string + content_to_send
+
+            self.latest_sender = message.author
 
             if len(message.embeds) > 0:
                 embed_to_send = message.embeds[0]
