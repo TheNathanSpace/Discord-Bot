@@ -20,7 +20,7 @@ class ListenerBog(commands.Cog):
 
             bog_chat = get(member.guild.voice_channels, id = 746147917651509329)
 
-            if bog_chat.members > 0:
+            if len(bog_chat.members) > 0:
 
                 await asyncio.sleep(2)
 
