@@ -1,5 +1,6 @@
 import asyncio
 import os
+from pathlib import Path
 
 import discord
 from discord.ext import commands
@@ -33,6 +34,9 @@ class ListenerBog(commands.Cog):
             # voice = get(bot.voice_clients, guild = ctx.guild)
 
             print("Trying to play audio")
+
+            if Path("jackson_in_bog_chat.mp3").exists(): print("Jackson bog exists")
+
             voice.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"), after = lambda e: print('done', e))
             voice.volume = 100
 
