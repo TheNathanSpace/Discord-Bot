@@ -11,6 +11,10 @@ class ListenerBog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    def print_exception(self, e):
+        if e:
+            print(e)
+
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         if member.id == 762063323201536020:
@@ -34,7 +38,7 @@ class ListenerBog(commands.Cog):
                 else:
                     voice = await member_channel.connect()
 
-                voice.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"), after = lambda e: print(e))
+                voice.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"), after = lambda e: self.print_exception())
 
                 while voice.is_playing():
                     await asyncio.sleep(1)
