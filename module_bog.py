@@ -13,9 +13,14 @@ class ListenerBog(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         if before.channel is None and after.channel.id != 746147917651509329:  # just joined channel other than the bog chat
-            voice = discord.utils.get(member.guild.voice_channels, id = after.channel.id)
+            member_channel = member.voice.channel
 
-            joined_channel = await voice.connect()
+            voice = get(self.bot.voice_clients, guild = member.guild)
+
+            if voice and voice.is_connected():
+                await voice.move_to(member_channel)
+            else:
+                voice = await member_channel.connect()
 
             # voice = get(bot.voice_clients, guild = ctx.guild)
             ydl_opts = {
@@ -27,8 +32,8 @@ class ListenerBog(commands.Cog):
                 }],
             }
 
-            joined_channel.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"))
-            joined_channel.volume = 100
-            joined_channel.is_playing()
+            voice.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"))
+            voice.volume = 100
+            voice.is_playing()
 
-            await joined_channel.disconnect()
+            await voice.disconnect()
