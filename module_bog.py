@@ -13,6 +13,7 @@ class ListenerBog(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         if before.channel is None and after.channel.id != 746147917651509329:  # just joined channel other than the bog chat
+            print("Okay")
             await asyncio.sleep(2)
 
             member_channel = after.channel
