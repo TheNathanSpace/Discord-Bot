@@ -33,7 +33,7 @@ class ListenerBog(commands.Cog):
             # voice = get(bot.voice_clients, guild = ctx.guild)
 
             print("Trying to play audio")
-            voice.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"))
+            voice.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"), after = lambda e: print('done', e))
             voice.volume = 100
 
             print(f"Playing: {voice.is_playing()}")
