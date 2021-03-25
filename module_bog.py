@@ -30,7 +30,7 @@ class ListenerBog(commands.Cog):
 
                 print(f"Not connected. Voice: {voice_true}.")
 
-                voice = await member_channel.connect()
+            voice = await member_channel.connect()
 
             # voice = get(bot.voice_clients, guild = ctx.guild)
 
