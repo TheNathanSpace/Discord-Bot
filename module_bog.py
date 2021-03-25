@@ -15,7 +15,7 @@ class ListenerBog(commands.Cog):
         if before.channel is None and after.channel.id != 746147917651509329:  # just joined channel other than the bog chat
             await asyncio.sleep(2)
 
-            member_channel = member.voice.channel
+            member_channel = after.channel
 
             voice = get(self.bot.voice_clients, guild = member.guild)
 
