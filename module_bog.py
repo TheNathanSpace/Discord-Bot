@@ -28,12 +28,7 @@ class ListenerBog(commands.Cog):
                 else:
                     voice_true = False
 
-                if voice.is_connected():
-                    connected = True
-                else:
-                    connected = False
-
-                print(f"Not connected. Voice: {voice_true}. Connected: {connected}.")
+                print(f"Not connected. Voice: {voice_true}.")
 
                 voice = await member_channel.connect()
 
