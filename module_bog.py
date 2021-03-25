@@ -11,7 +11,7 @@ class ListenerBog(commands.Cog):
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         if before.channel is None and after.channel.id != 746147917651509329:  # just joined channel other than the bog chat
-            bog_chat = discord.utils.get(discord.guild.voice_channels, id = 746147917651509329)
+            bog_chat = discord.utils.get(member.guild.voice_channels, id = 746147917651509329)
             print(f"Found Bog Chat. {bog_chat.id}")
 
             joined_channel = await self.bot.join_voice_channel(bog_chat)
