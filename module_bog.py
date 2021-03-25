@@ -35,10 +35,11 @@ class ListenerBog(commands.Cog):
 
             print("Trying to play audio")
 
-            if Path("jackson_in_bog_chat.mp3").exists(): print("Jackson bog exists")
+            voice.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"), after = lambda e: print(e))
 
-            voice.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"), after = lambda e: print('done', e))
-            voice.volume = 100
+            voice.is_playing()
+            voice.pause()
+            voice.resume()
 
             print(f"Playing: {voice.is_playing()}")
 
