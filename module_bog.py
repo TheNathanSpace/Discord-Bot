@@ -17,21 +17,26 @@ class ListenerBog(commands.Cog):
             return
 
         if before.channel is None and after.channel.id != 746147917651509329:  # just joined channel other than the bog chat
-            await asyncio.sleep(2)
 
-            member_channel = after.channel
+            bog_chat = get(member.guild.voice_channels, id = 746147917651509329)
 
-            voice = get(self.bot.voice_clients, guild = member.guild)
+            if bog_chat.members > 0:
 
-            if voice and voice.is_connected():
-                print("Already connected")
-                await voice.move_to(member_channel)
-            else:
-                voice = await member_channel.connect()
+                await asyncio.sleep(2)
 
-            voice.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"), after = lambda e: print(e))
+                member_channel = after.channel
 
-            while voice.is_playing():
-                await asyncio.sleep(1)
+                voice = get(self.bot.voice_clients, guild = member.guild)
 
-            await voice.disconnect()
+                if voice and voice.is_connected():
+                    print("Already connected")
+                    await voice.move_to(member_channel)
+                else:
+                    voice = await member_channel.connect()
+
+                voice.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"), after = lambda e: print(e))
+
+                while voice.is_playing():
+                    await asyncio.sleep(1)
+
+                await voice.disconnect()
