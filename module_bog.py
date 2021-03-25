@@ -28,19 +28,14 @@ class ListenerBog(commands.Cog):
                 print("Already connected")
                 await voice.move_to(member_channel)
             else:
-                if voice:
-                    voice_true = True
-                else:
-                    voice_true = False
-
-                # print(f"Not connected. Voice: {voice_true}.")
-
-            voice = await member_channel.connect()
+                voice = await member_channel.connect()
 
             # voice = get(bot.voice_clients, guild = ctx.guild)
 
+            print("Trying to play audio")
             voice.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"))
             voice.volume = 100
-            voice.is_playing()
+
+            print(f"Playing: {voice.is_playing()}")
 
             await voice.disconnect()
