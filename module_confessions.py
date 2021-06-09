@@ -69,13 +69,13 @@ class ListenerConfession(commands.Cog):
 
             new_author = False
             if self.latest_sender is None or self.latest_sender != message.author:
-                author_string = f"**{author_string}:**\n"
+                author_string = f"**{author_string}:** {jump_url}\n"
                 new_author = True
             else:
-                author_string = ""
+                author_string = f"{jump_url}\n"
 
             if len(message.content) > 0 and new_author:
-                content_to_send = f"{author_string} {jump_url}" + content_to_send
+                content_to_send = f"{author_string}" + content_to_send
             elif len(message.content) > 0 and not new_author:
                 content_to_send = content_to_send
             else:
