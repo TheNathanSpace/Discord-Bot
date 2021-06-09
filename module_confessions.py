@@ -26,7 +26,7 @@ class ListenerConfession(commands.Cog):
             message_time = message.created_at
             message_time = message_time + offset
 
-            jump_url = message.jump_url
+            jump_url = message.id
 
             time_string = "[" + message_time.strftime("%b %d, %Y %H:%M:%S.%f") + "]"
             author_string = message.author.name
@@ -69,10 +69,10 @@ class ListenerConfession(commands.Cog):
 
             new_author = False
             if self.latest_sender is None or self.latest_sender != message.author:
-                author_string = f"**{author_string}:** {jump_url}\n"
+                author_string = f"**{author_string}:** `{jump_url}`\n"
                 new_author = True
             else:
-                author_string = f"{jump_url}\n"
+                author_string = f"`{jump_url}`\n"
 
             if len(message.content) > 0 and new_author:
                 content_to_send = f"{author_string}" + content_to_send
