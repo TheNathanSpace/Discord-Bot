@@ -26,26 +26,13 @@ class ListenerConfession(commands.Cog):
             message_time = message.created_at
             message_time = message_time + offset
 
+            jump_url = message.jump_url
+
             time_string = "[" + message_time.strftime("%b %d, %Y %H:%M:%S.%f") + "]"
             author_string = message.author.name
 
             prefix = f"{time_string} {author_string}: "
             empty_prefix = " " * len(prefix)
-
-            # embed_list = message.embeds
-            # if len(embed_list) > 0:
-            #     embed_url_list = []
-            #     for embed in embed_list:
-            #
-            #         if embed.image != discord.Embed.Empty:
-            #             embed_url_list.append(embed.image.url)
-            #         if embed.video != discord.Embed.Empty:
-            #             print(type(embed.video))
-            #             print(type(embed.video.url))
-            #             embed_url_list.append(embed.video.url)
-            #
-            #     print(embed_url_list)
-            #     serialized_embeds = json.dumps(embed_url_list)
 
             attachment_list = message.attachments
             if len(attachment_list) > 0:
@@ -88,7 +75,7 @@ class ListenerConfession(commands.Cog):
                 author_string = ""
 
             if len(message.content) > 0 and new_author:
-                content_to_send = f"{author_string}" + content_to_send
+                content_to_send = f"{author_string} {jump_url}" + content_to_send
             elif len(message.content) > 0 and not new_author:
                 content_to_send = content_to_send
             else:
