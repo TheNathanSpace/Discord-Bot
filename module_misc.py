@@ -62,14 +62,17 @@ class ListenerMisc(commands.Cog):
 
 :no_entry_sign:ERROR!:no_entry_sign: :flag_ru:legitimate:flag_ru: presidents are irreplaceable :ballot_box: i could never delete you donald! :ballot_box: send this to ten other :briefcase:delegates:necktie: who give you :ballot_box_with_check:️votes:ballot_box_with_check:️ or never get jobs back from :flag_cn:china:flag_cn: again:x::x::construction_worker::factory::x::x: If you get 0 back: low-energy :no_entry_sign::no_entry_sign::turtle: 3 back: you’re bigly :top::frog: 5 back: you’re YUGE:tangerine::department_store::dollar: 10+ back: make america great again :star_and_crescent::taco::passport_control::no_entry::construction::statue_of_liberty::fireworks::flag_us:""")
 
-
     @commands.command(aliases = [])
     async def timestamp(self, ctx, message_id):
         trigger = ctx.message
-        msg = await ctx.fetch_message(message_id)
-
-        timezone = pytz.timezone("America/Denver")
-        created_at = msg.created_at
-
         await trigger.delete()
-        await ctx.send(f"Message `{str(message_id)}` created at {created_at.astimezone(timezone).strftime('%Y-%m-%d %H:%M:%S.%f %Z')}")
+
+        try:
+            msg = await ctx.fetch_message(message_id)
+
+            timezone = pytz.timezone("America/Denver")
+            created_at = msg.created_at
+
+            await ctx.send(f"Message `{str(message_id)}` created at {created_at.astimezone(timezone).strftime('%Y-%m-%d %H:%M:%S.%f %Z')}")
+        except:
+            await ctx.send("ur mum lol")
