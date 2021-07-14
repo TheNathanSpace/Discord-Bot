@@ -70,7 +70,7 @@ class ListenerMisc(commands.Cog):
 
         timezone = pytz.timezone("America/Denver")
         created_at = msg.created_at
-        created_at.as_timezone(timezone)
+        created_at.astimezone(timezone)
 
         await trigger.delete()
         await ctx.send(f"Message `{str(message_id)}` created at {created_at.strftime('%Y-%m-%d %H:%M:%S.%f %Z')}")
