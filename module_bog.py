@@ -48,7 +48,7 @@ class ListenerBog(commands.Cog):
                 await voice.disconnect()
 
     @commands.command(aliases = ['clan'])
-    async def clean(self, ctx: Context, actual: bool = False):
+    async def returntobog(self, ctx: Context, actual: bool = False):
         guild: Guild = ctx.guild
         bog_chat = get(guild.text_channels, id = 765299289516933151)
         # bog_chat = guild.get_thread(928124651924774912)
