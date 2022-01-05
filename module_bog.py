@@ -67,7 +67,7 @@ class ListenerBog(commands.Cog):
 
         value = ""
         for message in messages:
-            value += "https://discord.com/channels/491392853801566226/765299289516933151/" + message.id
+            value += "https://discord.com/channels/491392853801566226/765299289516933151/" + str(message.id)
             value += "\n"
         embed.add_field(name = "Messages:", value = value, inline = False)
 
