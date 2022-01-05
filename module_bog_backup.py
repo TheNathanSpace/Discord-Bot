@@ -83,9 +83,10 @@ class ListenerBogBackup(commands.Cog):
 
             self.latest_sender = message.author
 
-            if len(message.embeds) > 0:
-                embed_to_send = message.embeds[0]
+            if message.content != "<:boggang:755109642966925392>":
+                if len(message.embeds) > 0:
+                    embed_to_send = message.embeds[0]
 
-                await backup_bog_channel.send(content = content_to_send, embed = embed_to_send)
-            else:
-                await backup_bog_channel.send(content = content_to_send)
+                    await backup_bog_channel.send(content = content_to_send, embed = embed_to_send)
+                else:
+                    await backup_bog_channel.send(content = content_to_send)
