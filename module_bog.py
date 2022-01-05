@@ -69,7 +69,7 @@ class ListenerBog(commands.Cog):
         for message in delete_list:
             value += "https://discord.com/channels/491392853801566226/765299289516933151/" + str(message.id)
             value += "\n"
-        embed.add_field(name = "Messages:", value = value, inline = False)
+        await ctx.send(value)
 
         embed.set_author(name = "Bog Chat Cleaner", icon_url = "https://i0.kym-cdn.com/entries/icons/facebook/000/019/601/smilelaugh.jpg", url = "https://www.youtube.com/watch?v=90hIAXlBGzY")
         await ctx.send(embed = embed)
