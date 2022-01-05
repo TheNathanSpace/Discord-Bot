@@ -69,6 +69,7 @@ class ListenerBog(commands.Cog):
         sent_embed = await ctx.send(embed = embed)
 
         if not actual:
+            print("Messages to delete:")
             value = ""
             for message in delete_list:
                 value += "https://discord.com/channels/491392853801566226/765299289516933151/" + str(message.id)
@@ -78,12 +79,12 @@ class ListenerBog(commands.Cog):
             for message in delete_list:
                 await message.delete()
 
-        await sent_embed.delete()
+            await sent_embed.delete()
 
-        embed = nextcord.Embed(
-            colour = nextcord.Colour.dark_purple()
-        )
-        embed.add_field(name = "# deleted:", value = str(len(delete_list)), inline = True)
-        embed.add_field(name = "Backup invite link:", value = "https://discord.gg/R7uQny8xzU", inline = True)
-        embed.set_author(name = "Bog Chat Cleaner", icon_url = "https://i0.kym-cdn.com/entries/icons/facebook/000/019/601/smilelaugh.jpg", url = "https://www.youtube.com/watch?v=90hIAXlBGzY")
-        sent_embed = await ctx.send(embed = embed)
+            embed = nextcord.Embed(
+                colour = nextcord.Colour.dark_purple()
+            )
+            embed.add_field(name = "# deleted:", value = str(len(delete_list)), inline = True)
+            embed.add_field(name = "Backup invite link:", value = "https://discord.gg/R7uQny8xzU", inline = True)
+            embed.set_author(name = "Bog Chat Cleaner", icon_url = "https://i0.kym-cdn.com/entries/icons/facebook/000/019/601/smilelaugh.jpg", url = "https://www.youtube.com/watch?v=90hIAXlBGzY")
+            sent_embed = await ctx.send(embed = embed)
