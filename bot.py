@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 from module_bog import ListenerBog
+from module_bog_backup import ListenerBogBackup
 from module_confessions import ListenerConfession
 from module_dnd import ListenerDnD
 from module_help import Help, description
@@ -30,5 +31,6 @@ bot.add_cog(ListenerDnD(bot))
 bot.add_cog(Help(bot))
 bot.add_cog(ListenerConfession(bot))
 bot.add_cog(ListenerBog(bot))
+bot.add_cog(ListenerBogBackup(bot))
 
 bot.run(key)
