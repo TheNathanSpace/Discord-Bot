@@ -69,7 +69,7 @@ class ReactionImages(commands.Cog, name = "Reaction Images"):
         trigger = ctx.message
         await trigger.delete()
         try:
-            myfile = nextcord.File("/home/nathan/Reaction-Image/THAT%27S%20OUR%20HITLER%20small.gif", filename = "image.gif")
+            myfile = nextcord.File("/home/nathan/Reaction-Image/THAT'S OUR HITLER small.gif", filename = "image.gif")
             await ctx.send(file = myfile)
         except FileNotFoundError:
             myfile = nextcord.File("THAT'S OUR HITLER small.gif", filename = "image.gif")
