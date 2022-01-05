@@ -48,7 +48,7 @@ class ListenerBog(commands.Cog):
                 await voice.disconnect()
 
     @commands.command(aliases = ['clan'])
-    async def clean(self, ctx: Context):
+    async def clean(self, ctx: Context, actual: bool = False):
         guild: Guild = ctx.guild
         bog_chat = get(guild.text_channels, id = 765299289516933151)
         messages = await bog_chat.history(limit = 200).flatten()
@@ -63,16 +63,21 @@ class ListenerBog(commands.Cog):
             colour = discord.Colour.dark_purple()
         )
 
-        embed.add_field(name = "Number of messages to delete:", value = str(len(delete_list)), inline = False)
-
-        value = ""
-        for message in delete_list:
-            value += "https://discord.com/channels/491392853801566226/765299289516933151/" + str(message.id)
-            value += "\n"
-        await ctx.send(value)
+        embed.add_field(name = "Number of messages to delete:", value = str(len(delete_list)), inline = True)
+        embed.add_field(name = "Backup invite link:", value = "https://discord.gg/R7uQny8xzU", inline = True)
 
         embed.set_author(name = "Bog Chat Cleaner", icon_url = "https://i0.kym-cdn.com/entries/icons/facebook/000/019/601/smilelaugh.jpg", url = "https://www.youtube.com/watch?v=90hIAXlBGzY")
         await ctx.send(embed = embed)
+
+        if not actual:
+            value = ""
+            for message in delete_list:
+                value += "https://discord.com/channels/491392853801566226/765299289516933151/" + str(message.id)
+                value += "\n"
+            await ctx.send(value)
+        else:
+            for message in delete_list:
+                await message.delete()
 
         trigger = ctx.message
         await trigger.delete()
