@@ -3,7 +3,9 @@ import os
 from pathlib import Path
 
 import discord
+from discord import Guild, Message
 from discord.ext import commands
+from discord.ext.commands import Context
 from discord.utils import get
 
 
@@ -44,3 +46,27 @@ class ListenerBog(commands.Cog):
                     await asyncio.sleep(1)
 
                 await voice.disconnect()
+
+    @commands.command(aliases = ['clan'])
+    async def clean(self, ctx: Context):
+        guild: Guild = ctx.guild
+        bog_chat = get(guild.text_channels, id = 765299289516933151)
+        messages = await bog_chat.history(limit = 200).flatten()
+        message: Message
+
+        delete_list = list()
+        for message in messages:
+            if message.content != "<:boggang:755109642966925392>":
+                delete_list.append(message)
+
+        embed = discord.Embed(
+            colour = discord.Colour.dark_purple()
+        )
+
+        embed.add_field(name = "Number of messages to delete:", value = str(len(delete_list)), inline = False)
+
+        embed.set_author(name = "Bog Chat Cleaner", icon_url = "https://i0.kym-cdn.com/entries/icons/facebook/000/019/601/smilelaugh.jpg", url = "https://www.youtube.com/watch?v=90hIAXlBGzY")
+        await ctx.send(embed = embed)
+
+        trigger = ctx.message
+        await trigger.delete()
