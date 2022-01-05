@@ -62,12 +62,10 @@ class ListenerBog(commands.Cog):
         embed = discord.Embed(
             colour = discord.Colour.dark_purple()
         )
-
-        embed.add_field(name = "Number of messages to delete:", value = str(len(delete_list)), inline = True)
+        embed.add_field(name = "# to delete:", value = str(len(delete_list)), inline = True)
         embed.add_field(name = "Backup invite link:", value = "https://discord.gg/R7uQny8xzU", inline = True)
-
         embed.set_author(name = "Bog Chat Cleaner", icon_url = "https://i0.kym-cdn.com/entries/icons/facebook/000/019/601/smilelaugh.jpg", url = "https://www.youtube.com/watch?v=90hIAXlBGzY")
-        await ctx.send(embed = embed)
+        sent_embed = await ctx.send(embed = embed)
 
         if not actual:
             value = ""
@@ -79,5 +77,12 @@ class ListenerBog(commands.Cog):
             for message in delete_list:
                 await message.delete()
 
-        trigger = ctx.message
-        await trigger.delete()
+        await sent_embed.delete()
+
+        embed = discord.Embed(
+            colour = discord.Colour.dark_purple()
+        )
+        embed.add_field(name = "# deleted:", value = str(len(delete_list)), inline = True)
+        embed.add_field(name = "Backup invite link:", value = "https://discord.gg/R7uQny8xzU", inline = True)
+        embed.set_author(name = "Bog Chat Cleaner", icon_url = "https://i0.kym-cdn.com/entries/icons/facebook/000/019/601/smilelaugh.jpg", url = "https://www.youtube.com/watch?v=90hIAXlBGzY")
+        sent_embed = await ctx.send(embed = embed)
