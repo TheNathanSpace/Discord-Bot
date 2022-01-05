@@ -74,7 +74,7 @@ class ListenerBog(commands.Cog):
             for message in delete_list:
                 value += "https://discord.com/channels/491392853801566226/765299289516933151/" + str(message.id)
                 value += "\n"
-            await ctx.send(value)
+            print(value)
         else:
             for message in delete_list:
                 await message.delete()
