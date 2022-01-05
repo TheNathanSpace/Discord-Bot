@@ -1,8 +1,8 @@
 import asyncio
 import random
 
-import discord
-from discord.ext import commands
+import nextcord
+from nextcord.ext import commands
 
 
 class Kick(commands.Cog, name = "Kick (coming soon?)"):
@@ -38,8 +38,8 @@ class Kick(commands.Cog, name = "Kick (coming soon?)"):
         user = self.bot.get_user(int(user_to_kick))
         mention_string = user.mention
 
-        embed = discord.Embed(
-            colour = discord.Colour.dark_purple(),
+        embed = nextcord.Embed(
+            colour = nextcord.Colour.dark_purple(),
             description = "Vote started by " + trigger.author.display_name + " to kick " + mention_string
         )
 
@@ -93,8 +93,8 @@ class Kick(commands.Cog, name = "Kick (coming soon?)"):
         embed.insert_field_at(index = 1, name = "No", value = ":x:  " + str(no), inline = True)
 
         if yes > no:
-            new_embed = discord.Embed(
-                colour = discord.Colour.from_rgb(120, 178, 91),
+            new_embed = nextcord.Embed(
+                colour = nextcord.Colour.from_rgb(120, 178, 91),
                 description = "Vote started by " + trigger.author.display_name + " to kick " + mention_string
             )
             new_embed.set_author(name = "Vote Results", icon_url = "https://i0.kym-cdn.com/entries/icons/facebook/000/019/601/smilelaugh.jpg", url = "https://www.youtube.com/watch?v=90hIAXlBGzY")
@@ -115,8 +115,8 @@ class Kick(commands.Cog, name = "Kick (coming soon?)"):
             )
 
         else:
-            new_embed = discord.Embed(
-                colour = discord.Colour.from_rgb(219, 47, 63),
+            new_embed = nextcord.Embed(
+                colour = nextcord.Colour.from_rgb(219, 47, 63),
                 description = "Vote started by " + trigger.author.display_name + " to kick " + mention_string
             )
             new_embed.set_author(name = "Vote Results", icon_url = "https://i0.kym-cdn.com/entries/icons/facebook/000/019/601/smilelaugh.jpg", url = "https://www.youtube.com/watch?v=90hIAXlBGzY")

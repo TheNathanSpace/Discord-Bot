@@ -2,11 +2,11 @@ import asyncio
 import os
 from pathlib import Path
 
-import discord
-from discord import Guild, Message
-from discord.ext import commands
-from discord.ext.commands import Context
-from discord.utils import get
+import nextcord
+from nextcord import Guild, Message
+from nextcord.ext import commands
+from nextcord.ext.commands import Context
+from nextcord.utils import get
 
 
 class ListenerBog(commands.Cog):
@@ -40,7 +40,7 @@ class ListenerBog(commands.Cog):
                 else:
                     voice = await member_channel.connect()
 
-                voice.play(discord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"), after = lambda e: self.print_exception())
+                voice.play(nextcord.FFmpegPCMAudio("jackson_in_bog_chat.mp3"), after = lambda e: self.print_exception())
 
                 while voice.is_playing():
                     await asyncio.sleep(1)
@@ -59,8 +59,8 @@ class ListenerBog(commands.Cog):
             if message.content != "<:boggang:755109642966925392>":
                 delete_list.append(message)
 
-        embed = discord.Embed(
-            colour = discord.Colour.dark_purple()
+        embed = nextcord.Embed(
+            colour = nextcord.Colour.dark_purple()
         )
         embed.add_field(name = "# to delete:", value = str(len(delete_list)), inline = True)
         embed.add_field(name = "Backup invite link:", value = "https://discord.gg/R7uQny8xzU", inline = True)
@@ -79,8 +79,8 @@ class ListenerBog(commands.Cog):
 
         await sent_embed.delete()
 
-        embed = discord.Embed(
-            colour = discord.Colour.dark_purple()
+        embed = nextcord.Embed(
+            colour = nextcord.Colour.dark_purple()
         )
         embed.add_field(name = "# deleted:", value = str(len(delete_list)), inline = True)
         embed.add_field(name = "Backup invite link:", value = "https://discord.gg/R7uQny8xzU", inline = True)

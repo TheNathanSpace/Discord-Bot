@@ -1,5 +1,5 @@
 import pytz as pytz
-from discord.ext import commands
+from nextcord.ext import commands
 from requests import get
 
 

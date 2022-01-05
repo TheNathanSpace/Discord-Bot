@@ -2,8 +2,8 @@ import math
 import random
 import re
 
-import discord
-from discord.ext import commands
+import nextcord
+from nextcord.ext import commands
 
 
 class ListenerDnD(commands.Cog):
@@ -14,8 +14,8 @@ class ListenerDnD(commands.Cog):
     @commands.command()
     async def prices(self, ctx):
         """"DnD prices"""
-        embed = discord.Embed(
-            colour = discord.Colour.dark_purple()
+        embed = nextcord.Embed(
+            colour = nextcord.Colour.dark_purple()
         )
 
         prices_list = {"Korath fuel": "100(V) / 1 dL", "Nutrient paste": "2(V) / 1 L (Okella Station)\n 4(V) / 1 L (Black Market)", "O2 canister": "10(V) / 1, refill 1(V)"}
@@ -30,8 +30,8 @@ class ListenerDnD(commands.Cog):
     @commands.command()
     async def survival(self, ctx, name):
         """"DnD prices"""
-        embed = discord.Embed(
-            colour = discord.Colour.dark_purple()
+        embed = nextcord.Embed(
+            colour = nextcord.Colour.dark_purple()
         )
 
         chance = random.randint(0, 100)

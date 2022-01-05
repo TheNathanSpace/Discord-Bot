@@ -1,5 +1,5 @@
-import discord
-from discord.ext import commands
+import nextcord
+from nextcord.ext import commands
 
 from module_bog import ListenerBog
 from module_bog_backup import ListenerBogBackup
@@ -11,10 +11,10 @@ from module_reaction_images import ReactionImages
 from module_vote_to_kick import Kick
 from secrets import key
 
-intents = discord.Intents.default()
+intents = nextcord.Intents.default()
 
 bot = commands.Bot(command_prefix = '!', description = description, intents = intents)
-client = discord.Client()
+client = nextcord.Client()
 bot.remove_command("help")
 
 

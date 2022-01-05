@@ -1,5 +1,5 @@
-import discord
-from discord.ext import commands
+import nextcord
+from nextcord.ext import commands
 
 description_reaction = {"!cringe": "\"The goose,  Mr. Holmes!  The goose,  sir!\" he gasped.", "!funny": "COMEDY ACHIEVED", "!beat": "TOTALLY not radical, dude.", "!tyrant": "I will burn like the heathen kings of old.",
                         "!madness": "It's just... good business.", "!hitler": "Don't be stupid, be a **smarty!**"}
@@ -24,8 +24,8 @@ class Help(commands.Cog, name = "Util Commands"):
         # trigger = ctx.message
         # await trigger.delete()
 
-        embed = discord.Embed(
-            colour = discord.Colour.dark_purple(),
+        embed = nextcord.Embed(
+            colour = nextcord.Colour.dark_purple(),
             description = description
         )
 
@@ -42,8 +42,8 @@ class Help(commands.Cog, name = "Util Commands"):
         # trigger = ctx.message
         # await trigger.delete()
 
-        embed = discord.Embed(
-            colour = discord.Colour.dark_purple(),
+        embed = nextcord.Embed(
+            colour = nextcord.Colour.dark_purple(),
             description = description
         )
 
@@ -60,8 +60,8 @@ class Help(commands.Cog, name = "Util Commands"):
         # trigger = ctx.message
         # await trigger.delete()
 
-        embed = discord.Embed(
-            colour = discord.Colour.dark_purple()
+        embed = nextcord.Embed(
+            colour = nextcord.Colour.dark_purple()
         )
 
         for desc in description_dnd:
@@ -75,8 +75,8 @@ class Help(commands.Cog, name = "Util Commands"):
     async def helputility(self, ctx):
         """You already know 👉😎👉"""
 
-        embed = discord.Embed(
-            colour = discord.Colour.dark_purple()
+        embed = nextcord.Embed(
+            colour = nextcord.Colour.dark_purple()
         )
 
         for desc in description_utility:
