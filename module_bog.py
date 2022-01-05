@@ -50,8 +50,8 @@ class ListenerBog(commands.Cog):
     @commands.command(aliases = ['clan'])
     async def clean(self, ctx: Context, actual: bool = False):
         guild: Guild = ctx.guild
-        # bog_chat = get(guild.text_channels, id = 765299289516933151)
-        bog_chat = guild.get_thread(928124651924774912)
+        bog_chat = get(guild.text_channels, id = 765299289516933151)
+        # bog_chat = guild.get_thread(928124651924774912)
         messages = await bog_chat.history(limit = 200).flatten()
         message: Message
 
