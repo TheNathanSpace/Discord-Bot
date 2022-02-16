@@ -3,7 +3,7 @@ from nextcord.ext import commands
 from nextcord.utils import get
 
 image_dict = {"hitler": "https://i.imgur.com/CadlYk7.mp4", "cringe": "https://i.imgur.com/HYRgmzY.png", "cring": "https://i.imgur.com/HFr2wDu.png", "funny": "https://i.imgflip.com/3npccy.png", "beat": "https://i.imgur.com/WCBTQ71.png",
-              "tyrant": "https://i.imgur.com/l702mF4.jpg", "madness": "https://i.imgur.com/xPtdCTa.png"}
+              "tyrant": "https://i.imgur.com/l702mF4.jpg", "madness": "https://i.imgur.com/xPtdCTa.png", "a": "https://cdn.discordapp.com/attachments/885673393318404177/943333732532781076/unknown.png"}
 
 
 class ReactionImages(commands.Cog, name = "Reaction Images"):
@@ -79,3 +79,11 @@ class ReactionImages(commands.Cog, name = "Reaction Images"):
         except FileNotFoundError:
             myfile = nextcord.File("THAT'S OUR HITLER small.gif", filename = "image.gif")
             await ctx.send(file = myfile)
+
+    @commands.command(aliases = [])
+    async def a(self, ctx):
+        trigger = ctx.message
+        await trigger.delete()
+        e = nextcord.Embed()
+        e.set_image(url = image_dict["a"])
+        await ctx.send(embed = e)
