@@ -1,9 +1,8 @@
 import re
 
 import pytz as pytz
-from nextcord import Message
+from nextcord import Message, PartialMessageable
 from nextcord.ext import commands
-from nextcord.state import Channel
 from requests import get
 
 
@@ -87,6 +86,7 @@ class ListenerMisc(commands.Cog):
         if message.channel.id == message.author.dm_channel.id:  # dm only
             if message.author.id == 285538805728149504:
                 matched = re.match("(\[[0-9]*\]) (.*)", message.content)
-                channel: Channel = self.bot.get_channel(matched.group(1))
-                to_send = matched.group(2)
-                await channel.send(content = to_send)
+                if matched is not None:
+                    channel: PartialMessageable = self.bot.get_channel(matched.group(1))
+                    to_send = matched.group(2)
+                    await channel.send(content = to_send)
