@@ -90,8 +90,8 @@ class ListenerMisc(commands.Cog):
 
         if message.channel.id == dm_channel:  # dm only
             if message.author.id == 285538805728149504:
-                matched = re.match("(\[[0-9]*\]) (.*)", message.content)
+                matched = re.match("\[([0-9]*)\] (.*)", message.content)
                 if matched is not None:
-                    channel: PartialMessageable = self.bot.get_channel(matched.group(1))
+                    channel: PartialMessageable = self.bot.get_channel(int(matched.group(1)))
                     to_send = matched.group(2)
                     await channel.send(content = to_send)
