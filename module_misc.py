@@ -81,8 +81,9 @@ class ListenerMisc(commands.Cog):
             await ctx.send("ur mum lol")
 
     @commands.Cog.listener()
-    async def on_message(self, message):
-        message: Message
+    async def on_message(self, message: Message):
+        if message is None:
+            print("message none")
         if message.channel.id == message.author.dm_channel.id:  # dm only
             if message.author.id == 285538805728149504:
                 matched = re.match("(\[[0-9]*\]) (.*)", message.content)
