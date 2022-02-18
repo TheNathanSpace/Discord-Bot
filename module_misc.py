@@ -82,10 +82,11 @@ class ListenerMisc(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message: Message):
-        dm_channel = message.author.dm_channel.id
+        dm_channel = message.author.dm_channel
         if dm_channel is None:
             dm_channel = message.author.create_dm()
             print("dm channel created")
+        dm_channel = dm_channel.id
 
         if message.channel.id == dm_channel:  # dm only
             if message.author.id == 285538805728149504:
