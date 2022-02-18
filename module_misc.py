@@ -84,7 +84,7 @@ class ListenerMisc(commands.Cog):
     async def on_message(self, message: Message):
         dm_channel = message.author.dm_channel
         if dm_channel is None:
-            dm_channel = message.author.create_dm()
+            dm_channel = await message.author.create_dm()
             print("dm channel created")
         dm_channel = dm_channel.id
 
