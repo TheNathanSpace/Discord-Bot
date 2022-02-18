@@ -1,7 +1,7 @@
 import re
 
 import pytz as pytz
-from nextcord import Message, PartialMessageable
+from nextcord import Message, PartialMessageable, DMChannel
 from nextcord.ext import commands
 from requests import get
 
@@ -82,7 +82,7 @@ class ListenerMisc(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message: Message):
-        dm_channel = message.author.dm_channel
+        dm_channel: DMChannel = message.author.dm_channel
         if dm_channel is None:
             try:
                 dm_channel = await message.author.create_dm()
@@ -91,11 +91,11 @@ class ListenerMisc(commands.Cog):
 
         print(dm_channel)
 
-        dm_channel = dm_channel.id
+        dm_channel_id = dm_channel.id
 
-        print(dm_channel)
+        print(dm_channel_id)
 
-        if message.channel.id == dm_channel:  # dm only
+        if message.channel.id == dm_channel_id:  # dm only
             if message.author.id == 285538805728149504:
                 matched = re.match("\[([0-9]*)\] (.*)", message.content)
                 if matched is not None:
