@@ -89,11 +89,7 @@ class ListenerMisc(commands.Cog):
             except:
                 pass
 
-        print(dm_channel)
-
         dm_channel_id = dm_channel.id
-
-        print(dm_channel_id)
 
         if message.channel.id == dm_channel_id:  # dm only
             if message.author.id == 285538805728149504:
