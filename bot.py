@@ -1,6 +1,7 @@
 import nextcord
 from nextcord.ext import commands
 
+from module_analyze import ModuleAnalyze
 from module_bog import ListenerBog
 from module_bog_backup import ListenerBogBackup
 from module_confessions import ListenerConfession
@@ -32,5 +33,6 @@ bot.add_cog(Help(bot))
 bot.add_cog(ListenerConfession(bot))
 bot.add_cog(ListenerBog(bot))
 bot.add_cog(ListenerBogBackup(bot))
+bot.add_cog(ModuleAnalyze(bot))
 
 bot.run(key)
