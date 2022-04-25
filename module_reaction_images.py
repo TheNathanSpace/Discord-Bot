@@ -66,9 +66,9 @@ class ReactionImages(commands.Cog, name = "Reaction Images"):
 
     @commands.command(aliases = ['hitlr'])
     async def hitler(self, ctx):
-        guild: nextcord.Guild = ctx.guild
-        test_thread = guild.get_thread(928124651924774912)
-        await test_thread.join()
+        # guild: nextcord.Guild = ctx.guild
+        # test_thread = guild.get_thread(928124651924774912)
+        # await test_thread.join()
 
         """Don't be stupid, be a **smarty!**"""
         trigger = ctx.message
