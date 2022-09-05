@@ -13,6 +13,7 @@ from module_vote_to_kick import Kick
 from secrets import key
 
 intents = nextcord.Intents.default()
+intents.message_content = True
 
 bot = commands.Bot(command_prefix = '!', description = description, intents = intents)
 client = nextcord.Client()

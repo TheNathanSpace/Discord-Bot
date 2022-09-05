@@ -36,7 +36,7 @@ class ListenerDnD(commands.Cog):
 
         chance = random.randint(0, 100)
 
-        if name == "Connor": chance = 0.001
+        if name == "Tasha": chance = 0.001
 
         if name == "Rey": chance = 200
 

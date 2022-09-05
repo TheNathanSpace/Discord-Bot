@@ -2,7 +2,7 @@ import nextcord
 from nextcord.ext import commands
 from nextcord.utils import get
 
-image_dict = {"hitler": "https://i.imgur.com/CadlYk7.mp4", "cringe": "https://i.imgur.com/HYRgmzY.png", "cring": "https://i.imgur.com/HFr2wDu.png", "funny": "https://i.imgflip.com/3npccy.png", "beat": "https://i.imgur.com/WCBTQ71.png",
+image_dict = {"cringe": "https://i.imgur.com/HYRgmzY.png", "cring": "https://i.imgur.com/HFr2wDu.png", "funny": "https://i.imgflip.com/3npccy.png", "beat": "https://i.imgur.com/WCBTQ71.png",
               "tyrant": "https://i.imgur.com/l702mF4.jpg", "madness": "https://i.imgur.com/xPtdCTa.png", "a": "https://cdn.discordapp.com/attachments/885673393318404177/943333732532781076/unknown.png"}
 
 
@@ -63,22 +63,6 @@ class ReactionImages(commands.Cog, name = "Reaction Images"):
         e = nextcord.Embed()
         e.set_image(url = image_dict["madness"])
         await ctx.send(embed = e)
-
-    @commands.command(aliases = ['hitlr'])
-    async def hitler(self, ctx):
-        # guild: nextcord.Guild = ctx.guild
-        # test_thread = guild.get_thread(928124651924774912)
-        # await test_thread.join()
-
-        """Don't be stupid, be a **smarty!**"""
-        trigger = ctx.message
-        await trigger.delete()
-        try:
-            myfile = nextcord.File("/home/nathan/Reaction-Image/THAT'S OUR HITLER small.gif", filename = "image.gif")
-            await ctx.send(file = myfile)
-        except FileNotFoundError:
-            myfile = nextcord.File("THAT'S OUR HITLER small.gif", filename = "image.gif")
-            await ctx.send(file = myfile)
 
     @commands.command(aliases = [])
     async def a(self, ctx):

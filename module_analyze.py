@@ -3,7 +3,6 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
-import discord.utils
 from nextcord import Guild, TextChannel, Message
 from nextcord.ext import commands
 from nextcord.ext.commands import Context
@@ -54,41 +53,36 @@ class ModuleAnalyze(commands.Cog):
         self.latest_sender = None
 
     @commands.command()
-    async def archive_server(self, context: Context):
-        print(f"Started scraping messages from {context.guild.name}...")
-
-        # channel = int(channel)
+    async def update_archive(self, context: Context):
+        print(f"Started archiving messages from {context.guild.name}...")
         await context.message.delete()
+
+        guild: Guild = context.guild
+        text_channel_dict = {}
+        for channel in guild.text_channels:
+            text_channel_dict[channel.id] = None
+        for thread in guild.threads:
+            text_channel_dict[thread.id] = None
 
         self.create_database()
         connection = sqlite3.connect('database.db')
         cursor = connection.cursor()
-        guild: Guild = context.guild
-        text_channel_list = []
-        for channel in guild.text_channels:
-            text_channel_list.append(channel)
+        channel_ids = cursor.execute('SELECT DISTINCT channel_id FROM messages;')
+        for channel_id in channel_ids:
+            channel_id = channel_id[0]
+            if channel_id in text_channel_dict:
+                text_channel_dict[channel_id] = True
 
-        for thread in guild.threads:
-            text_channel_list.append(thread)
-        # text_channel_list.append(guild.get_channel(channel))
-
-        remove_channels = []
-        message_id = None
-        guild_row = cursor.execute('SELECT * FROM latest_message WHERE guild_id = ?;', (context.message.guild.id,)).fetchone()
-        if guild_row:
-            guild_id = guild_row[0]
-            channel_id = guild_row[1]
-            message_id = guild_row[2]
-
-            for channel in text_channel_list:
-                if channel.id == channel_id:
-                    break
-                remove_channels.append(channel)
+        for channel_id in text_channel_dict:
+            if text_channel_dict[channel_id] is not None:
+                latest = cursor.execute('SELECT message_id FROM messages WHERE channel_id = ? ORDER BY message_timestamp DESC;', (channel_id,)).fetchone()
+                text_channel_dict[channel_id] = latest[0]
 
         text_channel: TextChannel
-        for text_channel in text_channel_list:
-            if text_channel in remove_channels:
-                print(f"Skipping channel: {text_channel.name}")
+        for text_channel_id in text_channel_dict:
+            text_channel = guild.get_channel(text_channel_id)
+            if text_channel is None:
+                print(f"Error: Channel {text_channel_id} is null")
                 continue
 
             print(f"On channel: {text_channel.name}")
@@ -96,10 +90,11 @@ class ModuleAnalyze(commands.Cog):
             message_number = 0
 
             after = None
-            if message_id:
-                latest_channel: TextChannel = await context.guild.fetch_channel(channel_id)
-                latest_message: Message = await latest_channel.fetch_message(message_id)
+            if text_channel_dict[text_channel_id] is not None:
+                message_id = text_channel_dict[text_channel_id]
+                latest_message: Message = await text_channel.fetch_message(message_id)
                 after = latest_message.created_at
+                print("Getting all messages after " + after.date().strftime("%B %d, %G"))
             try:
                 async for message in text_channel.history(limit = None, oldest_first = True, after = after):
                     message_number += 1
@@ -117,9 +112,6 @@ class ModuleAnalyze(commands.Cog):
                     )
                     cursor.execute('INSERT INTO messages(message_id, channel_id, author_id, message_timestamp, attachment_url_list, message_text, reaction_list) VALUES(?,?,?,?,?,?,?) ON CONFLICT(message_id) DO NOTHING;', to_insert)
 
-                    most_recent = (message.guild.id, message.channel.id, message.id)
-                    cursor.execute('INSERT INTO latest_message(guild_id, channel_id, message_id) VALUES(?,?,?) ON CONFLICT(guild_id) DO UPDATE SET channel_id = excluded.channel_id, message_id = excluded.message_id;', most_recent)
-
                     connection.commit()
             except:
                 print(f"Error getting messages in channel {text_channel.name}. The bot probably doesn't have access to it.")
@@ -130,11 +122,11 @@ class ModuleAnalyze(commands.Cog):
         connection = sqlite3.connect('database.db')
         cursor = connection.cursor()
         cursor.execute('CREATE TABLE IF NOT EXISTS messages(message_id integer PRIMARY KEY, channel_id integer, author_id integer, message_timestamp float, attachment_url_list text, message_text text, reaction_list text);')
-        cursor.execute('CREATE TABLE IF NOT EXISTS latest_message(guild_id integer PRIMARY KEY, channel_id integer, message_id integer);')
         connection.commit()
 
     @commands.command()
     async def count_reactions(self, context: Context):
+        print(f"Counting reactions...")
         await context.message.delete()
 
         self.create_database()
@@ -145,7 +137,7 @@ class ModuleAnalyze(commands.Cog):
         for row in all_rows:
             reaction_dict = json.loads(row[0])
             for user in reaction_dict:
-                for reaction in reaction_dict[user]: # reaction: {"name": "uptrump_old", "id": 730559664625811486}
+                for reaction in reaction_dict[user]:  # reaction: {"name": "uptrump_old", "id": 730559664625811486}
                     if user not in user_reactions:
                         user_reactions[user] = {}
 
@@ -167,12 +159,12 @@ class ModuleAnalyze(commands.Cog):
             except:
                 username = "Unknown user"
 
-
             new_dict[f"{username} ({user})"] = dict(sorted(user_reactions[user].items(), key = lambda item: item[1], reverse = True))
 
-        Path("output.json").write_text(json.dumps(new_dict, indent = 4, ensure_ascii = False), encoding = "utf8")
+        Path(f"reactions_{datetime.now().timestamp()}.json").write_text(json.dumps(new_dict, indent = 4, ensure_ascii = False), encoding = "utf8")
         print(f"Finished counting reactions!")
 
+    # This fixes the older version of the database where the reactions hadn't been named
     @commands.command()
     async def fix_reactions(self, context: Context):
         await context.message.delete()

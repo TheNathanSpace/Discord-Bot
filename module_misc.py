@@ -87,7 +87,7 @@ class ListenerMisc(commands.Cog):
             try:
                 dm_channel = await message.author.create_dm()
             except:
-                pass
+                return
 
         dm_channel_id = dm_channel.id
 
