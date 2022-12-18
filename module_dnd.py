@@ -64,7 +64,7 @@ class ListenerDnD(commands.Cog):
             await ctx.send("*am i a joke to you*")
 
     @commands.command()
-    async def food(self, ctx, people, food_dl):
+    async def calc_food(self, ctx, people, food_dl):
         try:
             days = (float(food_dl) / float(people))
             await ctx.send(f"That's gonna last you {round(days, 3)} days")
