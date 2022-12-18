@@ -1,3 +1,7 @@
+import json
+import random
+from pathlib import Path
+
 import nextcord
 from nextcord.ext import commands
 from nextcord.utils import get
@@ -9,6 +13,8 @@ image_dict = {"cringe": "https://i.imgur.com/HYRgmzY.png", "cring": "https://i.i
 class ReactionImages(commands.Cog, name = "Reaction Images"):
     def __init__(self, bot):
         self.bot = bot
+        input_file = Path("food_gif_urls.txt")
+        self.food_gifs = json.loads(input_file.read_text(encoding = "utf8"))
 
     @commands.command()
     async def cringe(self, ctx):
@@ -70,4 +76,13 @@ class ReactionImages(commands.Cog, name = "Reaction Images"):
         await trigger.delete()
         e = nextcord.Embed()
         e.set_image(url = image_dict["a"])
+        await ctx.send(embed = e)
+
+    @commands.command(aliases = [])
+    async def food(self, ctx):
+        trigger = ctx.message
+        await trigger.delete()
+        e = nextcord.Embed()
+        random_food = random.choice(self.food_gifs)
+        e.set_image(url = random_food)
         await ctx.send(embed = e)
